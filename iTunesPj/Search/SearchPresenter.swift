@@ -22,7 +22,8 @@ final class SearchPresenter: SearchPresentationLogic {
     
     // MARK: - Presentation Logic
     func presentFetchedAlbum(_ response: SearchModels.SearchAlbums.Response) {
-        let viewModel = SearchModels.SearchAlbums.ViewModel(albums: response.albums)
+        let sortResponse = response.albums.sorted{$0.collectionName! < $1.collectionName!}
+        let viewModel = SearchModels.SearchAlbums.ViewModel(albums: sortResponse)
         viewController?.displayFetchedAlbum(viewModel)
     }
 }

@@ -14,7 +14,7 @@ protocol SearchDisplayLogic: AnyObject {
 final class SearchViewController: UIViewController {
 
     // MARK: - UI Outlets
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var searchBar: UISearchBar!
     
     // MARK: - Public Properties
@@ -41,7 +41,7 @@ final class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        setupCollectionView()
         setupSearchBar()
     }
 
@@ -74,64 +74,73 @@ final class SearchViewController: UIViewController {
         self.router = router
     }
     
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
+    private func setupCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     private func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = "Введите название альбома"
-        
-        
     }
-  
-    // MARK: - UI Actions
-
     
 }
 
 // MARK: - Display Logic
-
 extension SearchViewController: SearchDisplayLogic {
     func displayFetchedAlbum(_ viewController: SearchModels.SearchAlbums.ViewModel) {
         searchResult = viewController.albums
         DispatchQueue.main.async {
             print(self.searchResult)
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
 }
 
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    // MARK: - UICollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         searchResult.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let album = searchResult[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let album = searchResult[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as! SearchCell
         cell.configure(with: album)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let id = searchResult[indexPath.row].collectionID!
+    // MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let id = searchResult[indexPath.item].collectionID!
         requestToSelectedAlbum(by: id)
         router?.routeToAlbumDetails()
-        tableView.deselectRow(at: indexPath, animated: true)
+        view.endEditing(true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
+    // MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width / 2 - 10, height: UIScreen.main.bounds.height / 3)
+    }
     
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    // MARK: - UISearchBarDelegate
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { (_) in
             self.requestToSearchAlbum(name: searchText)
-            print("fine")
+            
+            /* В запрос также можно добавить ActivityIndicatorView дабы он отображался пока данные доходят и картинка отображается, но я взглянул что у Apple Медиатека реализована без него и решил сделать также
+             Я знаю, что его предпочтительно реализовывать при любой подгрузке из сети, чтобы пользователь понимал что данные приходят */
         })
     }
 }
+

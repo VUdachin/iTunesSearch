@@ -29,7 +29,6 @@ final class SearchWorker: SearchWorkingLogic {
                 print(error)
             case .success(let album):
                 completion(album)
-                print(album)
             }
         }
     }

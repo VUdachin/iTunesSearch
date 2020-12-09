@@ -55,7 +55,6 @@ class NetworkWorker: NetworkWorkingLogic {
             
             guard let response = response as? HTTPURLResponse else {
                 completion(.failure(DataError.invalidResponse))
-                print(error)
                 return
             }
             
@@ -68,15 +67,12 @@ class NetworkWorker: NetworkWorkingLogic {
                     }
                     catch {
                         completion(.failure(DataError.decodingError))
-                        print(error)
                     }
                 } else {
                     completion(.failure(DataError.invalidData))
-                    print(error)
                 }
             } else {
                 completion(.failure(DataError.serverError))
-                print(error)
             }
         }.resume()
     }

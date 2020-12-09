@@ -17,19 +17,18 @@ struct AlbumDetailResponse: Codable {
 struct AlbumDetail: Codable {
     let wrapperType: WrapperType
     let collectionType: String?
-    let artistID, collectionID: Int
+    let artistID, collectionID: Int?
     let amgArtistID: Int?
-    let artistName: String
+    let artistName: String?
     let collectionName, collectionCensoredName: String?
-    let artistViewURL, collectionViewURL: String
-    let artworkUrl60, artworkUrl100: String
-    let collectionPrice: Double
+    let artistViewURL, collectionViewURL: String?
+    let artworkUrl60, artworkUrl100: String?
+    let collectionPrice: Double?
     let collectionExplicitness: String?
     let trackCount: Int
     let copyright: String?
     let country: String?
     let currency: String?
-    let releaseDate: Date
     let primaryGenreName: String?
     let kind: String?
     let trackID: Int?
@@ -50,7 +49,7 @@ struct AlbumDetail: Codable {
         case artistName, collectionName, collectionCensoredName
         case artistViewURL = "artistViewUrl"
         case collectionViewURL = "collectionViewUrl"
-        case artworkUrl60, artworkUrl100, collectionPrice, collectionExplicitness, trackCount, copyright, country, currency, releaseDate, primaryGenreName, kind
+        case artworkUrl60, artworkUrl100, collectionPrice, collectionExplicitness, trackCount, copyright, country, currency, primaryGenreName, kind
         case trackID = "trackId"
         case trackName, trackCensoredName
         case trackViewURL = "trackViewUrl"

@@ -25,9 +25,19 @@ class TrackCell: UITableViewCell {
     }
     
     func configure(with model: AlbumDetail) {
-        trackNameLabel.text = model.trackName
-        trackTimeLabel.text = "\(model.trackTimeMillis! * 1000 * 60)"
+        trackNameLabel.text = "\(model.trackNumber ?? 0). \(model.trackName ?? "")"
+        trackTimeLabel.text = timeFromMillis(duration: model.trackTimeMillis ?? 0)
     }
     
-
+    func timeFromMillis(duration: Int) -> String {
+        let interval = TimeInterval(duration / 1000)
+        print(interval)
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.unitsStyle = .abbreviated
+        formatter.maximumUnitCount = 2
+        
+        return formatter.string(from: interval)!
+    }
+    
 }

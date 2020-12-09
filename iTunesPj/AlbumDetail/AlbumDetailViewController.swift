@@ -103,14 +103,21 @@ extension AlbumDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tracks = selectedAlbum[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackCell
-        if tracks.wrapperType == WrapperType.track {
-            cell.configure(with: tracks)
-        }
+        let album = selectedAlbum[indexPath.row]
         
-        return cell
+        if indexPath.row == 0 {
+            let albumCell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as! AlbumCell
+            if album.wrapperType == WrapperType.collection  {
+                albumCell.configure(with: album)
+            }
+            return albumCell
+        } else {
+            let songCell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackCell
+            if album.wrapperType == WrapperType.track {
+                songCell.configure(with: album)
+            }
+            return songCell
+        }
     }
-    
     
 }

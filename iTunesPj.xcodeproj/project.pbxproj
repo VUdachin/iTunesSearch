@@ -30,6 +30,7 @@
 		B1CD5E78257A692500FC5627 /* AlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD5E72257A692500FC5627 /* AlbumDetailInteractor.swift */; };
 		B1CD5E7C257A69B200FC5627 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD5E7B257A69B200FC5627 /* TrackCell.swift */; };
 		B1CD5E82257A86B800FC5627 /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD5E81257A86B800FC5627 /* AlbumDetail.swift */; };
+		B1CD5E8A257C33BA00FC5627 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD5E89257C33BA00FC5627 /* AlbumCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		B1CD5E72257A692500FC5627 /* AlbumDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailInteractor.swift; sourceTree = "<group>"; };
 		B1CD5E7B257A69B200FC5627 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		B1CD5E81257A86B800FC5627 /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
+		B1CD5E89257C33BA00FC5627 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +92,10 @@
 		B1CD5E352579B44E00FC5627 /* iTunesPj */ = {
 			isa = PBXGroup;
 			children = (
-				B1CD5E86257A903100FC5627 /* Models */,
 				B1CD5E362579B44E00FC5627 /* AppDelegate.swift */,
 				B1CD5E382579B44E00FC5627 /* SceneDelegate.swift */,
-				B1CD5E85257A901600FC5627 /* Some things */,
+				B1CD5E86257A903100FC5627 /* Models */,
+				B1CD5E85257A901600FC5627 /* Extras */,
 				B1CD5E592579B8E700FC5627 /* Search */,
 				B1CD5E6B257A68A300FC5627 /* AlbumDetail */,
 				B1CD5E3C2579B44E00FC5627 /* Main.storyboard */,
@@ -144,17 +146,18 @@
 			isa = PBXGroup;
 			children = (
 				B1CD5E7B257A69B200FC5627 /* TrackCell.swift */,
+				B1CD5E89257C33BA00FC5627 /* AlbumCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		B1CD5E85257A901600FC5627 /* Some things */ = {
+		B1CD5E85257A901600FC5627 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
 				B1CD5E5E2579C05600FC5627 /* NetworkManager.swift */,
 				B1CD5E66257A5BB700FC5627 /* UIImageExtension.swift */,
 			);
-			path = "Some things";
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		B1CD5E86257A903100FC5627 /* Models */ = {
@@ -253,6 +256,7 @@
 				B1CD5E73257A692500FC5627 /* AlbumDetailPresenter.swift in Sources */,
 				B1CD5E75257A692500FC5627 /* AlbumDetailRouter.swift in Sources */,
 				B1CD5E552579B8D700FC5627 /* SearchModels.swift in Sources */,
+				B1CD5E8A257C33BA00FC5627 /* AlbumCell.swift in Sources */,
 				B1CD5E7C257A69B200FC5627 /* TrackCell.swift in Sources */,
 				B1CD5E77257A692500FC5627 /* AlbumDetailViewController.swift in Sources */,
 				B1CD5E67257A5BB700FC5627 /* UIImageExtension.swift in Sources */,
