@@ -15,11 +15,6 @@ enum DataError: Error {
     case serverError
 }
 
-//enum URLPaths {
-//    case albumURL = "https://itunes.apple.com/search?entity=album&term="
-//    case trackURL = "https://itunes.apple.com/lookup?entity=song&id="
-//}
-
 let searchURL = "https://itunes.apple.com/search?"
 let lookupURL = "https://itunes.apple.com/lookup?"
 
